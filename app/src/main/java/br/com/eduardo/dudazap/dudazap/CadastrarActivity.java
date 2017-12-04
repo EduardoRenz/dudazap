@@ -2,6 +2,9 @@ package br.com.eduardo.dudazap.dudazap;
 
 import android.*;
 import android.Manifest;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -91,6 +94,31 @@ public class CadastrarActivity extends AppCompatActivity {
             return  false;
         }
 
+    }
+
+    public  void onRequestPermissionsResult(int requestCode,String[] permissions, int[] grantResults){
+        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        for(int resultado : grantResults){
+            if(resultado == PackageManager.PERMISSION_DENIED){
+                alertaValidaPermissao();
+            }
+        }
+
+    }
+
+    private void alertaValidaPermissao() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Permissão necessaria");
+        builder.setMessage("Cara, pra ti poder usar o app, tem que aceitar a permissão!");
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 
