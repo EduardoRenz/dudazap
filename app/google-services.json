@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "971721687800",
+    "firebase_url": "https://dudazap-337e7.firebaseio.com",
+    "project_id": "dudazap-337e7",
+    "storage_bucket": "dudazap-337e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971721687800:android:fdd492acd44aa985",
+        "android_client_info": {
+          "package_name": "br.com.eduardo.dudazap.dudazap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "971721687800-vqlar7fp6tf82a9a89j0gg84al4iem38.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.eduardo.dudazap.dudazap",
+            "certificate_hash": "97cd75d5cd31d5c9eaa99209059e60af41e12c29"
+          }
+        },
+        {
+          "client_id": "971721687800-vpvtcoqplmcinn1nl1vujn29qovgb3m5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGjld6fTZTbt3pWAxFrB65C7OpHRQxmlc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "971721687800-vpvtcoqplmcinn1nl1vujn29qovgb3m5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

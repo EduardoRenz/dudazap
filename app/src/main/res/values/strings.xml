@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DudaZap</string>
+    <string name="acessar">Acessar</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="validacao">Validação</string>
+    <string name="text_sms">Você receberá uma mensagem SMS com código de verificação.</string>
+    <string name="validar">Validar</string>
+</resources>
