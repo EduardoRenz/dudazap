@@ -10,7 +10,10 @@ import android.widget.EditText;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
+import java.util.HashMap;
 import java.util.Random;
+
+import br.com.eduardo.dudazap.helper.Preferencias;
 
 public class CadastrarActivity extends AppCompatActivity {
     private EditText nome,telefone;
@@ -42,7 +45,16 @@ public class CadastrarActivity extends AppCompatActivity {
                 int numeroRandomico = randomico.nextInt(9999 - 1000 + 1000);
 
                 String token = String.valueOf(numeroRandomico);
-                Log.i("Token",token);
+                //Log.i("Token",token);
+
+                Preferencias preferencias = new Preferencias(getApplicationContext());
+                preferencias.salvarUserPreferencias(nomeUsuario,telefoneUsuario,token);
+
+
+                HashMap<String,String> usuario = preferencias.getDadosUsuario();
+
+                Log.i("Token",usuario.get("token"));
+
             }
         });
 
