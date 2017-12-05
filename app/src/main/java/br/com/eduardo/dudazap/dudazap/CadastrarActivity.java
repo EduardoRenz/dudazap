@@ -3,6 +3,7 @@ package br.com.eduardo.dudazap.dudazap;
 import android.*;
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -56,7 +57,7 @@ public class CadastrarActivity extends AppCompatActivity {
                 telefoneUsuario = telefoneUsuario.replace(")","");
                 telefoneUsuario = telefoneUsuario.replace("-","");
                 telefoneUsuario = telefoneUsuario.replace(" ","");
-                telefoneUsuario = "5554";
+                telefoneUsuario = "5555215554";
                 Log.i("Telefone sem formatacao",telefoneUsuario);
 
                 //Gerar Token
@@ -75,7 +76,12 @@ public class CadastrarActivity extends AppCompatActivity {
                 Log.i("Token",usuario.get("token"));
 
                 //Envio do SMS
-                enviaSMS("+" + telefoneUsuario,"testes");
+                boolean enviadoSMS = enviaSMS("+" + telefoneUsuario,"Codigo de confirmaçao:" + token);
+
+                if(enviadoSMS){
+                    startActivity(new Intent(CadastrarActivity.this,AtivarActivity.class));
+                    finish();
+                }
 
             }
         });

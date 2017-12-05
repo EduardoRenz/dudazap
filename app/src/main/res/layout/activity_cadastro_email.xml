@@ -38,36 +38,55 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
-        android:id="@+id/valid"
+        android:id="@+id/text_cads"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20sp"
-        android:text="@string/validacao"
+        android:text="@string/cadastrar"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
-        android:text="@string/text_sms"
-        android:textAlignment="viewStart" />
-
     <EditText
-        android:id="@+id/txt_codigo"
+        android:id="@+id/txt_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Digite o código"
-        android:inputType="number"
+        android:hint="Digite seu nome"
+        android:inputType="textPersonName"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/txt_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Digite seu email"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/txt_senha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Digite a senha"
+        android:inputType="textPassword"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/txt_confirm_senha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Confirme a senha"
+        android:inputType="textPassword"
         android:textAlignment="center" />
 
     <Button
-        android:id="@+id/bt_validar"
+        android:id="@+id/bt_email_cadastrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/validar" />
+        android:text="@string/cadastrar" />
 
 </LinearLayout>
