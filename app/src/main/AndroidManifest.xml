@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".CadastrarActivity" />
         <activity android:name=".AtivarActivity" />
-        <activity android:name=".CadastroEmailActivity"></activity>
+        <activity android:name=".CadastroEmailActivity" />
+        <activity android:name=".PrincipalActivity"></activity>
     </application>
 
 </manifest>

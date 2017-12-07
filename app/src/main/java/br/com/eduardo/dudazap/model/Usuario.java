@@ -1,5 +1,10 @@
 package br.com.eduardo.dudazap.model;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
+
+import br.com.eduardo.dudazap.helper.ConfigFirebase;
+
 /**
  * Created by Eduardo on 04/12/2017.
  */
@@ -13,6 +18,12 @@ public class Usuario {
 
     }
 
+    //Salva na database
+    public void salvarDados(){
+        DatabaseReference reference = ConfigFirebase.getFirebase();
+        reference.child("usuarios").child(getId()).setValue(this);
+    }
+    @Exclude
     public String getId() {
         return id;
     }
@@ -37,6 +48,7 @@ public class Usuario {
         this.email = email;
     }
 
+    @Exclude
     public String getSenha() {
         return senha;
     }

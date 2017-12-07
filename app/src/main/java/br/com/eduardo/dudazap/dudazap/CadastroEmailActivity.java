@@ -12,6 +12,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthEmailException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 import br.com.eduardo.dudazap.helper.ConfigFirebase;
 import br.com.eduardo.dudazap.model.Usuario;
@@ -55,9 +58,27 @@ public class CadastroEmailActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(CadastroEmailActivity.this,"Sucesso!",Toast.LENGTH_SHORT).show();
+                    usuario.setId(task.getResult().getUser().getUid()); // pega o uid do user
+                    usuario.salvarDados();
+
+                    auth.signOut(); // Desloga o usuario assim que cadastrar
+                    finish();
+
                 }
                 else{
-                    Toast.makeText(CadastroEmailActivity.this,"Erro ao cadastrar!",Toast.LENGTH_SHORT).show();
+                    try {
+                        throw task.getException();
+                    } catch (FirebaseAuthWeakPasswordException e) {
+                        Toast.makeText(CadastroEmailActivity.this,"Erro ao cadastrar: Senha muito ruim!",Toast.LENGTH_SHORT).show();
+                    }
+                    catch (FirebaseAuthEmailException e) {
+                        Toast.makeText(CadastroEmailActivity.this,"Erro ao cadastrar: E-mail inválido!",Toast.LENGTH_SHORT).show();
+                    }
+                    catch (FirebaseAuthUserCollisionException e) {
+                        Toast.makeText(CadastroEmailActivity.this,"Usuário já é cadastrado!",Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(CadastroEmailActivity.this,"Erro!"+e.getMessage(),Toast.LENGTH_SHORT).show();;
+                    }
                 }
             }
         });
