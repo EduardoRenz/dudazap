@@ -24,5 +24,4 @@
         android:title="Sair"
         android:orderInCategory="200"
         app:showAsAction="never" />
-
 </menu>

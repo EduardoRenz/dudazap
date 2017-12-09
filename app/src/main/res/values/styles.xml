@@ -9,6 +9,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="titleTextColor">@color/colorAccent</item>
         <item name="colorControlHighlight">@color/common_google_signin_btn_text_dark_pressed</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:itemBackground">@color/colorPrimary</item>
         <!-- <item name="windowActionBar">false</item> -->
     </style>
 
