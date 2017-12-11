@@ -19,7 +19,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:layout_margin="0dp"></br.com.eduardo.dudazap.helper.SlidingTabLayout>
+        android:layout_margin="0dp"
+        android:theme="@style/CustomTab"
+       ></br.com.eduardo.dudazap.helper.SlidingTabLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viwer_pagina"

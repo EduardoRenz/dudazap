@@ -1,5 +1,6 @@
 package br.com.eduardo.dudazap.dudazap;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
+import br.com.eduardo.dudazap.helper.Base64Custom;
 import br.com.eduardo.dudazap.helper.ConfigFirebase;
 import br.com.eduardo.dudazap.model.Usuario;
 
@@ -58,10 +60,13 @@ public class CadastroEmailActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(CadastroEmailActivity.this,"Sucesso!",Toast.LENGTH_SHORT).show();
-                    usuario.setId(task.getResult().getUser().getUid()); // pega o uid do user
+                    String identificador = Base64Custom.codificarBase64(usuario.getEmail());
+                    usuario.setId(identificador); // pega o uid do user
                     usuario.salvarDados();
 
-                    auth.signOut(); // Desloga o usuario assim que cadastrar
+                    //auth.signOut(); // Desloga o usuario assim que cadastrar
+
+                    startActivity(new Intent(CadastroEmailActivity.this,MainActivity.class));
                     finish();
 
                 }
