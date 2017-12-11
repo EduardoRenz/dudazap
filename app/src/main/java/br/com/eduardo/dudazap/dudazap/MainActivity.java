@@ -17,7 +17,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import br.com.eduardo.dudazap.helper.Base64Custom;
 import br.com.eduardo.dudazap.helper.ConfigFirebase;
+import br.com.eduardo.dudazap.helper.Preferencias;
 import br.com.eduardo.dudazap.model.Usuario;
 
 public class MainActivity extends AppCompatActivity {
@@ -71,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+
+                    Preferencias preferencias = new Preferencias(MainActivity.this);
+                    String idUsuarioLogado = Base64Custom.codificarBase64(usuario.getEmail());
+                    preferencias.salvarDados(idUsuarioLogado);
+
                     startActivity(new Intent(MainActivity.this,PrincipalActivity.class));
                     finish();
                 }

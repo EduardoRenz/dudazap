@@ -68,7 +68,7 @@ public class CadastrarActivity extends AppCompatActivity {
                 //Log.i("Token",token);
 
                 Preferencias preferencias = new Preferencias(getApplicationContext());
-                preferencias.salvarUserPreferencias(nomeUsuario,telefoneUsuario,token);
+                //preferencias.salvarUserPreferencias(nomeUsuario,telefoneUsuario,token);
 
 
                 HashMap<String,String> usuario = preferencias.getDadosUsuario();

@@ -15,6 +15,9 @@ public class Preferencias {
     private SharedPreferences preferences;
     private final String NOME_ARQUIVO = "Dudazap.preferencias";
     private SharedPreferences.Editor editor;
+
+    private final String CHAVE_IDENTIFICADOR = "idUsuarioLogado";
+
     public  Preferencias(Context contexto){
         this.contexto = contexto;
         preferences = contexto.getSharedPreferences(NOME_ARQUIVO,Context.MODE_PRIVATE);
@@ -23,10 +26,9 @@ public class Preferencias {
 
     }
 
-    public  void salvarUserPreferencias(String nome,String telefone, String token){
-        editor.putString("nome",nome);
-        editor.putString("telefone",telefone);
-        editor.putString("token",token);
+    public  void salvarDados(String idUsuario){
+        editor.putString(CHAVE_IDENTIFICADOR,idUsuario);
+
         editor.commit();
     }
 
@@ -36,6 +38,12 @@ public class Preferencias {
         dadossuario.put("telefone",preferences.getString("telefone",null));
         dadossuario.put("token",preferences.getString("token",null));
         return dadossuario;
+    }
+
+
+
+    public String getIDentificador(){
+        return preferences.getString(CHAVE_IDENTIFICADOR,null);
     }
 
 }

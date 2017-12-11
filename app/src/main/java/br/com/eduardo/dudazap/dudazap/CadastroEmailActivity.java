@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 import br.com.eduardo.dudazap.helper.Base64Custom;
 import br.com.eduardo.dudazap.helper.ConfigFirebase;
+import br.com.eduardo.dudazap.helper.Preferencias;
 import br.com.eduardo.dudazap.model.Usuario;
 
 public class CadastroEmailActivity extends AppCompatActivity {
@@ -65,6 +66,12 @@ public class CadastroEmailActivity extends AppCompatActivity {
                     usuario.salvarDados();
 
                     //auth.signOut(); // Desloga o usuario assim que cadastrar
+
+
+                    Preferencias preferencias = new Preferencias(CadastroEmailActivity.this);
+                    String idUsuarioLogado = Base64Custom.codificarBase64(usuario.getEmail());
+                    preferencias.salvarDados(idUsuarioLogado);
+
 
                     startActivity(new Intent(CadastroEmailActivity.this,MainActivity.class));
                     finish();
