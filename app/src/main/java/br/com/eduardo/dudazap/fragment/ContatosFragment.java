@@ -16,6 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import br.com.eduardo.dudazap.adapter.ContatoAdapter;
 import br.com.eduardo.dudazap.dudazap.R;
 import br.com.eduardo.dudazap.helper.ConfigFirebase;
 import br.com.eduardo.dudazap.helper.Preferencias;
@@ -28,7 +29,7 @@ public class ContatosFragment extends Fragment {
 
     private ListView listView;
     private ArrayAdapter adapter;
-    private  ArrayList<String> contatos;
+    private  ArrayList<Contato> contatos;
 
     private DatabaseReference firebase;
     private ValueEventListener valueEventListener;
@@ -49,10 +50,7 @@ public class ContatosFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_contatos, container, false);
 
         listView = (ListView) view.findViewById(R.id.contatos);
-        adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.lista_contatos,R.id.contato_nome,contatos
-
-        );
+        adapter = new ContatoAdapter(getActivity(),contatos);
         listView.setAdapter(adapter);
 
         Preferencias preferencias = new Preferencias(getActivity());
@@ -66,7 +64,7 @@ public class ContatosFragment extends Fragment {
 
                 for(DataSnapshot dados: dataSnapshot.getChildren()){
                     Contato contato = dados.getValue(Contato.class);
-                    contatos.add(contato.getNome());
+                    contatos.add(contato);
                 }
                 adapter.notifyDataSetChanged();
             }
