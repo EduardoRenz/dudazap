@@ -116,14 +116,7 @@ public class PrincipalActivity extends AppCompatActivity {
                 }
 
 
-
-
                 //Recuperar dados de contato do user a ser adicionado
-
-
-
-
-
                 //Verificar se contato é cadastrado
                 IdContato = Base64Custom.codificarBase64(emailContato);
 

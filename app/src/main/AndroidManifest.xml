@@ -22,7 +22,14 @@
         <activity android:name=".CadastrarActivity" />
         <activity android:name=".AtivarActivity" />
         <activity android:name=".CadastroEmailActivity" />
-        <activity android:name=".PrincipalActivity"></activity>
+        <activity android:name=".PrincipalActivity" />
+        <activity android:name=".ConversaActivity"
+            android:parentActivityName=".PrincipalActivity"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PrincipalActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -1,17 +1,21 @@
 package br.com.eduardo.dudazap.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.eduardo.dudazap.dudazap.ConversaActivity;
 import br.com.eduardo.dudazap.dudazap.R;
 import br.com.eduardo.dudazap.model.Contato;
 
@@ -44,13 +48,25 @@ public class ContatoAdapter extends ArrayAdapter<Contato> {
 
         view = inflater.inflate(R.layout.lista_contatos,parent,false);
 
-        Contato contato = contatos.get(position);
+        final Contato contato = contatos.get(position);
 
         TextView nome = (TextView) view.findViewById(R.id.contato_nome);
         TextView email = (TextView) view.findViewById(R.id.contato_email);
 
         email.setText(contato.getEmail());
         nome.setText(contato.getNome());
+
+
+      /*  view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Click",contato.getEmail());
+                Intent intent = new Intent(context,ConversaActivity.class);
+                context.startActivity(intent);
+            }
+        });*/
+
+
         return view;
     }
 }
