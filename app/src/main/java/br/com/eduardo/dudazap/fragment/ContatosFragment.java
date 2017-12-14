@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +36,7 @@ public class ContatosFragment extends Fragment {
     private ArrayAdapter adapter;
     private  ArrayList<Contato> contatos;
 
+
     private DatabaseReference firebase;
     private ValueEventListener valueEventListener;
     public ContatosFragment() {
@@ -43,21 +45,19 @@ public class ContatosFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
+
 
         contatos = new ArrayList<>();
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_contatos, container, false);
-
         listView = (ListView) view.findViewById(R.id.contatos);
-
         adapter = new ContatoAdapter(getActivity(),contatos);
         listView.setAdapter(adapter);
 
 
-
-          Preferencias preferencias = new Preferencias(getActivity());
+        Preferencias preferencias = new Preferencias(getActivity());
 
         firebase = ConfigFirebase.getFirebase().child("contatos").child(preferencias.getIDentificador());
         valueEventListener = new ValueEventListener() {
@@ -83,6 +83,9 @@ public class ContatosFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getContext(),ConversaActivity.class);
+                Contato contato = contatos.get(i);
+                intent.putExtra("nome",contato.getNome());
+                intent.putExtra("email",contato.getEmail());
                 startActivity(intent);
             }
         });

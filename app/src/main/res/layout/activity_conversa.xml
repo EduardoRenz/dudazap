@@ -7,38 +7,49 @@
     android:layout_height="match_parent"
     tools:background="?attr/colorBackgroundFloating"
     tools:context="br.com.eduardo.dudazap.dudazap.ConversaActivity">
-    
+
 
     <include
         android:id="@+id/tool_conversa"
-        layout="@layout/toolbar"></include>
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></include>
     <ListView
         android:id="@+id/lv_conversas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8sp"
+        android:layout_below="@id/tool_conversa"
+        android:layout_above="@id/barra_mensagem"
+        android:divider="@null"
+        android:dividerHeight="0dp"
        >
 
     </ListView>
     <LinearLayout
+        android:id="@+id/barra_mensagem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="5sp"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white">
         <EditText
+            android:id="@+id/txt_enviar_mensagem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Mensagem"
             android:layout_weight="5"
             android:padding="4sp"
-            android:background="@android:color/white"/>
+            />
         <ImageButton
+            android:id="@+id/bt_enviar_mensagem"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_action_send"
             android:background="@color/colorAccent"
+            android:theme="@style/CustomButton"
             />
         
     </LinearLayout>
