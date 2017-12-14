@@ -112,6 +112,7 @@ public class ConversaActivity extends AppCompatActivity {
                 mensageiro.setIdUsuario(idUserRemetente);
                 mensageiro.setMensagem(textoMensagem);
                 salvarMensagem(idUserRemetente,idUserDestinatario,mensageiro);
+                salvarMensagem(idUserDestinatario,idUserRemetente,mensageiro);
                 mensagem.setText("");
             }
         });
