@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.database.DatabaseReference;
 
 import br.com.eduardo.dudazap.helper.Base64Custom;
 import br.com.eduardo.dudazap.helper.ConfigFirebase;
@@ -27,6 +28,8 @@ public class CadastroEmailActivity extends AppCompatActivity {
     private Button cadastrar;
     private Usuario usuario;
     private FirebaseAuth auth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,14 +66,17 @@ public class CadastroEmailActivity extends AppCompatActivity {
                     Toast.makeText(CadastroEmailActivity.this,"Sucesso!",Toast.LENGTH_SHORT).show();
                     String identificador = Base64Custom.codificarBase64(usuario.getEmail());
                     usuario.setId(identificador); // pega o uid do user
+                    usuario.setNome(usuario.getNome());
                     usuario.salvarDados();
+
+
 
                     //auth.signOut(); // Desloga o usuario assim que cadastrar
 
 
                     Preferencias preferencias = new Preferencias(CadastroEmailActivity.this);
                     String idUsuarioLogado = Base64Custom.codificarBase64(usuario.getEmail());
-                    preferencias.salvarDados(idUsuarioLogado);
+                    preferencias.salvarDados(idUsuarioLogado,usuario.getNome());
 
 
                     startActivity(new Intent(CadastroEmailActivity.this,MainActivity.class));

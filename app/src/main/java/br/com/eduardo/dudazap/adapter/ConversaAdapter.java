@@ -10,56 +10,45 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.com.eduardo.dudazap.dudazap.R;
 import br.com.eduardo.dudazap.model.Contato;
+import br.com.eduardo.dudazap.model.Conversa;
 
 /**
- * Created by Eduardo on 11/12/2017.
+ * Created by Eduardo on 14/12/2017.
  */
 
-public class ContatoAdapter extends ArrayAdapter<Contato> {
-
-    private  ArrayList<Contato> contatos;
+public class ConversaAdapter  extends ArrayAdapter<Conversa> {
+    private ArrayList<Conversa> conversas;
     private  Context context;
-
-    public ContatoAdapter(@NonNull Context c,  ArrayList<Contato> objects) {
+    public ConversaAdapter(Context c,  ArrayList<Conversa> objects) {
         super(c, 0, objects);
-        this.contatos = objects;
+        this.conversas = objects;
         this.context = c;
-
     }
 
 
-    @NonNull
+
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = null;
-        if(contatos == null){
+        if(conversas == null){
             return null;
         }
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        view = inflater.inflate(R.layout.lista_conversas,parent,false);
 
-        view = inflater.inflate(R.layout.lista_contatos,parent,false);
 
-        final Contato contato = contatos.get(position);
+        final Conversa conversa = conversas.get(position);
 
         TextView nome = (TextView) view.findViewById(R.id.conversas_nome);
-        TextView email = (TextView) view.findViewById(R.id.contato_email);
+        TextView email = (TextView) view.findViewById(R.id.conversas_ultima);
 
-        email.setText(contato.getEmail());
-        nome.setText(contato.getNome());
-
-
-      /*  view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Click",contato.getEmail());
-                Intent intent = new Intent(context,ConversaActivity.class);
-                context.startActivity(intent);
-            }
-        });*/
+        email.setText(conversa.getNome());
+        nome.setText(conversa.getMensagem());
 
 
         return view;

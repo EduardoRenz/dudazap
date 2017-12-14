@@ -25,6 +25,7 @@ import br.com.eduardo.dudazap.adapter.MensagemAdapter;
 import br.com.eduardo.dudazap.helper.Base64Custom;
 import br.com.eduardo.dudazap.helper.ConfigFirebase;
 import br.com.eduardo.dudazap.helper.Preferencias;
+import br.com.eduardo.dudazap.model.Conversa;
 import br.com.eduardo.dudazap.model.Mensagem;
 
 public class ConversaActivity extends AppCompatActivity {
@@ -40,6 +41,7 @@ public class ConversaActivity extends AppCompatActivity {
     private ValueEventListener valueEventListenerMensagem;
     //Dados de envio
     private String idUserRemetente,idUserDestinatario;
+    private String nomeUsuarioRemetente;
 
 
     @Override
@@ -61,6 +63,7 @@ public class ConversaActivity extends AppCompatActivity {
 
         Preferencias preferencias = new Preferencias(ConversaActivity.this);
         idUserRemetente = preferencias.getIDentificador();
+        nomeUsuarioRemetente = preferencias.getNome();
         String emailDestinatario = extra.getString("email");
         idUserDestinatario = Base64Custom.codificarBase64(emailDestinatario) ;
 
@@ -111,8 +114,29 @@ public class ConversaActivity extends AppCompatActivity {
                 Mensagem mensageiro = new Mensagem();
                 mensageiro.setIdUsuario(idUserRemetente);
                 mensageiro.setMensagem(textoMensagem);
-                salvarMensagem(idUserRemetente,idUserDestinatario,mensageiro);
-                salvarMensagem(idUserDestinatario,idUserRemetente,mensageiro);
+
+
+               if(!salvarMensagem(idUserRemetente,idUserDestinatario,mensageiro) || !salvarMensagem(idUserDestinatario,idUserRemetente,mensageiro)){
+                   Toast.makeText(ConversaActivity.this,"Erro ao enviar mensagem, tente novamente",Toast.LENGTH_LONG);
+                   return;
+               }
+
+
+
+                // Salva conversa de quem enviou
+                Conversa conversa = new Conversa();
+                conversa.setIdUsuario(idUserDestinatario);
+                conversa.setNome(extra.getString("nome"));
+                conversa.setMensagem(textoMensagem);
+                salvarConversa(idUserRemetente,idUserDestinatario,conversa);
+
+
+                conversa = new Conversa();
+                conversa.setIdUsuario(idUserDestinatario);
+                conversa.setNome(nomeUsuarioRemetente);
+                conversa.setMensagem(textoMensagem);
+                salvarConversa(idUserDestinatario,idUserRemetente,conversa);
+
                 mensagem.setText("");
             }
         });
@@ -133,6 +157,19 @@ public class ConversaActivity extends AppCompatActivity {
             return false;
         }
     }
+
+
+    private boolean salvarConversa(String idRemetente,String idDestinatario,Conversa conversa){
+        try {
+            firebase = ConfigFirebase.getFirebase().child("conversas") ;
+            firebase.child(idRemetente).child(idDestinatario).setValue(conversa);
+            return true;
+        }catch (Exception e){
+        e.printStackTrace();
+        return false;
+        }
+    }
+
 
     @Override
     protected void onStop() {

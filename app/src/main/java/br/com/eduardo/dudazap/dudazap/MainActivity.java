@@ -14,8 +14,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import br.com.eduardo.dudazap.helper.Base64Custom;
 import br.com.eduardo.dudazap.helper.ConfigFirebase;
@@ -28,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
     private EditText email,senha;
     private DatabaseReference refDatabase;
     private FirebaseAuth auth;
+    String idUsuarioLogado;
+    private DatabaseReference firebase;
+    private ValueEventListener valueEventListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,9 +81,29 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
 
-                    Preferencias preferencias = new Preferencias(MainActivity.this);
-                    String idUsuarioLogado = Base64Custom.codificarBase64(usuario.getEmail());
-                    preferencias.salvarDados(idUsuarioLogado);
+
+                    idUsuarioLogado = Base64Custom.codificarBase64(usuario.getEmail());
+
+                    firebase = ConfigFirebase.getFirebase()
+                            .child("usuarios").child(idUsuarioLogado);
+
+                    valueEventListener = new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            Usuario usuarioRecuperado = dataSnapshot.getValue(Usuario.class);
+
+                            Preferencias preferencias = new Preferencias(MainActivity.this);
+                            preferencias.salvarDados(idUsuarioLogado,usuarioRecuperado.getNome());
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    };
+                    firebase.addListenerForSingleValueEvent(valueEventListener);
+
 
                     startActivity(new Intent(MainActivity.this,PrincipalActivity.class));
                     finish();
